@@ -1,8 +1,11 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block content %} 
-<div class="container">    
-    <h1>글 목록입니다.</h1>    
+
+
+{% if user.is_authenticated %} <!--# 유저가 로그인한 상태라면-->
+<div class="container">
+  <h1>글 목록입니다.</h1>
     <div class="row">        
         {% for post in posts %}        
         <div class="col-md-4 col-12">            
@@ -10,13 +13,21 @@
                 <div class="card-body">                
                     <h5 class="card-title">{{ post.title }}</h5>                
                     <p class="card-text">{{ post.content }}</p>                
-                    <p>{{ post.created_at }}</p>                
+                    <p>{{ post.created_at }}</p>   
+                    <p>조회수: {{ post.view_count }} </p>             
                     <a href="{% url 'posts:show' post.pk %}" class="btn btn-primary">상세보기</a>              
                 </div>            
             </div>        
         </div>        
         {% endfor %}    
     </div> 
-</div> 
-<a class="nav-link" href="{% url 'posts:new' %}">새글쓰기</a>
+    <a class="nav-link" href="{% url 'posts:new' %}">새글쓰기</a>
+</div>
+{% else %}
+  <h3>로그인 후 이용이 가능합니다.</h3>
+    <a href="{% url 'account_login' %}" class="btn btn-warning">로그인</a>
+    <a href="{% url 'account_signup' %}" class="btn btn-warning">회원가입</a>
+    
+{% endif %}
+
 {% endblock %}

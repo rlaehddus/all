@@ -8,8 +8,9 @@ def create(request):
     if request.method == "POST":        
         title = request.POST.get('title')        
         content = request.POST.get('content')
+        user = request.user
         image = request.FILES.get('image')
-        Post.objects.create(title=title, content=content, image = image)          
+        Post.objects.create(title=title, content=content, image = image, user = user)          
         return redirect('posts:main')   
 
 def main(request):    
@@ -18,7 +19,9 @@ def main(request):
 
 
 def show(request, id):    
-    post = Post.objects.get(pk=id)    
+    post = Post.objects.get(pk=id)  
+    post.view_count += 1
+    post.save()  
     return render(request, 'posts/show.html', {'post': post})
 
 
