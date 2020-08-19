@@ -3,8 +3,8 @@
 	<h1>상세보기 페이지</h1> 
 	<h3>글 제목 : {{ post.title }} </h3>
     <br>
-    {% if post.user %} 
-        <h3> 작성자: {{ post.user }} </h3><br> 
+    {% if post.writer %} 
+        <h3> 작성자: {{ post.writer }} </h3><br> 
     {% else %} 
         <h3> 작성자: 알 수 없음</h3><br> 
     {% endif %}
@@ -19,7 +19,7 @@
 	<br>
     <h3> 수정 시각 : {{  post.updated_at }}</h3><br>
     <h3>조회수: {{ post.view_count }} </h3>  <br>
-    {% if user == post.user %} 
+    {% if user == post.writer %} 
         <a href="{% url 'posts:update' post.pk %}" class="btn btn-primary">수정</a> 
         <a href="{% url 'posts:delete' post.pk %}" class="btn btn-danger">삭제</a> 
     {% endif %}
