@@ -1,4 +1,4 @@
-# 다섯번째 세션을 진행하기 위한 사전 자료
+# 여름방학 8주차 세션을 진행하기 위한 사전 자료
 <pre>pip install pillow</pre>
 <pre>pip install django-allauth</pre>
 ### setting, model 수정 후
