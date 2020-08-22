@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, redirect, get_object_or_404 
-from .models import Post
-
+from .models import Post, Comment
+import pdb
 def new(request):    
     return render(request, 'posts/new.html')
 
@@ -22,7 +22,8 @@ def show(request, id):
     post = Post.objects.get(pk=id)  
     post.view_count += 1
     post.save()  
-    return render(request, 'posts/show.html', {'post': post})
+    all_comments = post.comments.all().order_by('-created_at')
+    return render(request, 'posts/show.html', {'post': post, 'comments' : all_comments})
 
 
 def update(request, id):
@@ -39,3 +40,29 @@ def delete(request, id):
     post = get_object_or_404(Post, pk=id)
     post.delete()
     return redirect('posts:main')
+
+def create_comment(request, post_id):
+    if request.method == "POST":
+        post = get_object_or_404(Post, pk=post_id)
+        current_user = request.user
+        comment_content = request.POST.get('content')
+        Comment.objects.create(content=comment_content, writer=current_user, post=post)
+    return redirect('posts:show', post_id)
+
+
+def update_comment(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == "POST": 
+        post.comment_content = request.POST['content']
+        comment.save() 
+        return redirect('posts:show', post_id)
+    return render(request, 'posts/comment.html', {'post': post})
+
+
+def delete_comment(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    comment.delete()
+    return redirect('posts:show', post_id)
+
+
+

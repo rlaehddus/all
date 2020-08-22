@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',#가입계정관리
     'allauth.socialaccount',#소셜계정관리
+    'allauth.socialaccount.providers.google'
 ]
 
 MIDDLEWARE = [
@@ -141,5 +142,5 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 
-SITE_ID=1
-LOGIN_REDIRECT_URL='/'
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
