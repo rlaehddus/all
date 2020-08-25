@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',#가입계정관리
     'allauth.socialaccount',#소셜계정관리
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [

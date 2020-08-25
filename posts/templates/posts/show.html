@@ -46,8 +46,8 @@
                    <b>{{ comment.writer }}</b> : {{ comment.content }}<br>
                    <sm>{{ comment.created_at }}</sm><br>
                    {% if user == comment.writer %}
-                      <a href="{% url 'posts:update_comment' comment.pk %}" class="btn btn-primary">수정</a> 
-                      <a href="{% url 'posts:delete_comment' comment.pk %}" class="btn btn-danger">삭제</a> 
+                      <a href="{% url 'posts:update_comment' comment.pk %}" class="btn btn-primary">수정하기</a> 
+                      <a href="{% url 'posts:delete_comment' comment.pk %}" class="btn btn-danger">삭제하기</a> 
                    {% endif %}
                </div>
            </div>
