@@ -44,10 +44,10 @@
            <div class="card">
                <div class="card-body">
                    <b>{{ comment.writer }}</b> : {{ comment.content }}<br>
-                   <small>{{ comment.created_at }}</small><br>
+                   <sm>{{ comment.created_at }}</sm><br>
                    {% if user == comment.writer %}
-                      <a href="{% url 'posts:update_comment' post.pk %}" class="btn btn-primary">수정</a> 
-                      <a href="{% url 'posts:delete_comment' post.pk %}" class="btn btn-danger">삭제</a> 
+                      <a href="{% url 'posts:update_comment' comment.pk %}" class="btn btn-primary">수정</a> 
+                      <a href="{% url 'posts:delete_comment' comment.pk %}" class="btn btn-danger">삭제</a> 
                    {% endif %}
                </div>
            </div>

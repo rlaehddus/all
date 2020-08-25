@@ -50,19 +50,20 @@ def create_comment(request, post_id):
     return redirect('posts:show', post_id)
 
 
-def update_comment(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+def update_comment(request, id):
+    comment = get_object_or_404(Commnets, pk=id)
     if request.method == "POST": 
-        post.comment_content = request.POST['content']
+        comment.content = request.POST['content']
         comment.save() 
-        return redirect('posts:show', post_id)
-    return render(request, 'posts/comment.html', {'post': post})
+        return redirect('posts:show', comment.post.id)
+    return render(request, 'posts/comment.html', {'comment': comment})
 
 
-def delete_comment(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+def delete_comment(request, id):
+    comment = get_object_or_404(Comments, pk=id)
     comment.delete()
-    return redirect('posts:show', post_id)
+    return redirect('posts:show', comment.post.id)
+
 
 
 
