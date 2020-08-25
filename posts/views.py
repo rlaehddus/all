@@ -51,7 +51,7 @@ def create_comment(request, post_id):
 
 
 def update_comment(request, id):
-    comment = get_object_or_404(Commnets, pk=id)
+    comment = get_object_or_404(Commnet, pk=id)
     if request.method == "POST": 
         comment.content = request.POST['content']
         comment.save() 
@@ -60,7 +60,7 @@ def update_comment(request, id):
 
 
 def delete_comment(request, id):
-    comment = get_object_or_404(Comments, pk=id)
+    comment = get_object_or_404(Comment, pk=id)
     comment.delete()
     return redirect('posts:show', comment.post.id)
 
