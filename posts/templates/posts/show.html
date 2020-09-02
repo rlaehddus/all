@@ -37,7 +37,16 @@
             <input type = "submit" class = "btn btn-primary" value = "확인">
         </form>  
     </div>
-
+    
+    <div class="container mt-5">
+        <a href="{% url'posts:post_like' post.id %}?redirect_to=show">
+            {% if user in post.like_user_set.all %}
+                <i class="fas fa-heart"></i>
+            {% else %}
+                <i class="far fa-heart"></i>
+            {% endif %}               
+    </a>         
+    </div>
 
     <div class="container mt-5 mb-5">
         {% for comment in comments %}

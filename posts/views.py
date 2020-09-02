@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, redirect, get_object_or_404 
 from .models import Post, Comment
 import pdb
+from django.contrib.auth.decorators import login_required
+
 def new(request):    
     return render(request, 'posts/new.html')
 
@@ -51,7 +53,7 @@ def create_comment(request, post_id):
 
 
 def update_comment(request, id):
-    comment = get_object_or_404(Commnet, pk=id)
+    comment = get_object_or_404(Comment, pk=id)
     if request.method == "POST": 
         comment.content = request.POST['content']
         comment.save() 
@@ -64,6 +66,24 @@ def delete_comment(request, id):
     comment.delete()
     return redirect('posts:show', comment.post.id)
 
+@login_required
+def post_like(request, post.id)
+        post = get_object_or_404(Post, pk=post_id)
+        post_like, post_like_created = post.like_set.get_or_create(user=request.user)
+
+    if not post_like_created:
+        post_like.delete()
+
+    if request.GET.get('redirect_to') == 'show':
+        return redirect('posts:show', post_id)
+    else:
+        return redirect('posts:main')
+
+
+@login_required
+def like_list(request):
+    likes = request.user.like_set.all()
+    return render(request,'posts/like_list.html',{'likes':likes})
 
 
 
