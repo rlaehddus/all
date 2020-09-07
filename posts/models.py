@@ -12,12 +12,12 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     image = models.ImageField(upload_to='images/', null=True)
+    like_user_set = models.ManyToManyField(User, blank=True, related_name="like_user_set", through="Like")
+    like_count = models.IntegerField(default = 0)
 
-    like_user_set = models.ManyToManyField(User, blank=True, related_name='like_user_set', through='Like')
-
-@property
-def like_count(self):
-    return self.like_user_set.count()
+    @property
+    def like_count(self):
+        return self.like_user_set.count()
 
 class Comment(models.Model): 
     content = models.TextField() 
@@ -30,7 +30,6 @@ class Comment(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)
 

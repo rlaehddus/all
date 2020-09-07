@@ -36,16 +36,24 @@
    
             <input type = "submit" class = "btn btn-primary" value = "확인">
         </form>  
-    </div>
-    
+    </div>     
+
     <div class="container mt-5">
-        <a href="{% url'posts:post_like' post.id %}?redirect_to=show">
+        <a href="{% url 'posts:post_like' post.id %}?redirect_to=show">   
             {% if user in post.like_user_set.all %}
                 <i class="fas fa-heart"></i>
             {% else %}
                 <i class="far fa-heart"></i>
-            {% endif %}               
-    </a>         
+            {% endif %}         
+        </a>      
+    </div>
+
+    <div>{{ post.like_count }}명이 좋아합니다.</div>
+
+    <div> 
+        {% for like_user in post.like_user_set.all %} 
+           <p>{{ like_user.username }}</p>
+        {% endfor %}
     </div>
 
     <div class="container mt-5 mb-5">
@@ -61,7 +69,5 @@
                </div>
            </div>
         {% endfor %}
-    </div>
-
-   
+    </div> 
 {% endblock %}

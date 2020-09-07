@@ -67,9 +67,9 @@ def delete_comment(request, id):
     return redirect('posts:show', comment.post.id)
 
 @login_required
-def post_like(request, post_id)
-        post = get_object_or_404(Post, pk=post_id)
-        post_like, post_like_created = post.like_set.get_or_create(user=request.user)
+def post_like(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    post_like, post_like_created = post.like_set.get_or_create(user=request.user)
 
     if not post_like_created:
         post_like.delete()
