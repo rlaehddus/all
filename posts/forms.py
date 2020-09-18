@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Post
+from .models import *
 
 class PostForm(ModelForm):
     class Meta:
@@ -16,7 +16,7 @@ class PostForm(ModelForm):
             }
 
 def save(self, **kwargs):
-    post = super().save(commit=Flase)
+    post = super().save(commit=False)
     post.user = kwargs.get('user', None)
     post.save()
     return post

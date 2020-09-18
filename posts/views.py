@@ -22,7 +22,7 @@ def create(request):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            form.save(user = request.user)
             return redirect('main')
         else:
             form = PostForm()
