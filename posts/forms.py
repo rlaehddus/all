@@ -17,6 +17,6 @@ class PostForm(ModelForm):
 
     def save(self, **kwargs):
         post = super().save(commit=False)
-        post.user = kwargs.get('user', None)
+        post.writer = kwargs.get('writer', None)
         post.save()
         return post
