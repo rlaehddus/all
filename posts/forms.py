@@ -15,8 +15,8 @@ class PostForm(ModelForm):
             'content': ('내용을 입력해주세요.'),
             }
 
-def save(self, **kwargs):
-    post = super().save(commit=False)
-    post.user = kwargs.get('user', None)
-    post.save()
-    return post
+    def save(self, **kwargs):
+        post = super().save(commit=False)
+        post.user = kwargs.get('user', None)
+        post.save()
+        return post
